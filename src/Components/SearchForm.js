@@ -12,7 +12,7 @@ class SearchForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    let path = `query/${this.query.value}`;
+    let path = `/search/${this.query.value}`;
     this.props.history.push(path);
     this.props.onSearch(this.state.searchText);
     e.currentTarget.reset();
@@ -25,8 +25,10 @@ class SearchForm extends React.Component {
           type='search'
           name='search'
           placeholder='Search'
+          required
           onChange={this.onSearchChange}
-          ref={input => (this.query = input)}
+          ref={input => (this.query = input) 
+          }
         />
         <button type='submit' className='search-button'>
           <svg
