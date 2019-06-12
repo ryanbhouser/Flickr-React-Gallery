@@ -83,7 +83,7 @@ class App extends React.Component {
               render={() => <Gallery title={'Dogs'} data={this.state.dogs} />}
             />
             <Route
-              path='/search/:tag'
+              path='/:tag'
               render={() => (
                 <Gallery
                   title={this.state.imagesTitle}
