@@ -2,12 +2,12 @@ import React from 'react';
 import MainNav from './MainNav';
 import SearchForm from './SearchForm';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header>
       <h1>React Image Gallery</h1>
       <p>Search for an image below...</p>
-      <SearchForm />
+      <SearchForm onSearch={props.performSearch} />
       <MainNav />
     </header>
   );

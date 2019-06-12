@@ -17,6 +17,10 @@ class App extends React.Component {
     };
   }
 
+  performSearch = (query) => {
+    this.getImagesFromFlickr(query);
+  };
+
   componentDidMount() {
     this.getImagesFromFlickr('mountains');
     this.getImagesFromFlickr('forrest');
@@ -47,7 +51,7 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <Header />
+        <Header onSearch={this.performSearch} />
         <section className='photo-container'>
           <Switch>
             <Route
@@ -63,7 +67,7 @@ class App extends React.Component {
               render={() => <Gallery data={this.state.dogs} />}
             />
             <Route
-              path='/:search'
+              path='/:query'
               render={() => <Gallery data={this.state.images} />}
             />
           </Switch>
