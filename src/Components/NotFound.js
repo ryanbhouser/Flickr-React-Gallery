@@ -3,10 +3,10 @@ import React from 'react';
 class NotFound extends React.Component {
   render() {
     return (
-      <li className='not-found'>
-        <h3>No Results Found</h3>
-        <p>You search did not return any results. Please try again.</p>
-      </li>
+      <div className='not-found'>
+        <h3>Sorry, that page doesn't exist!</h3>
+        <p>Try clicking any of the buttons or searching for a tag using the input box above.</p>
+      </div>
     );
   }
 }

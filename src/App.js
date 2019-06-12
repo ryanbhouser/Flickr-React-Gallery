@@ -5,6 +5,7 @@ import apiKey from './config';
 
 import Header from './Components/Header';
 import Gallery from './Components/Gallery';
+import NotFound from './Components/NotFound';
 
 class App extends React.Component {
   constructor() {
@@ -41,7 +42,10 @@ class App extends React.Component {
         } else if (tag === 'dogs') {
           this.setState({ dogs: responseData.photos.photo });
         } else {
-          this.setState({ images: responseData.photos.photo, imagesTitle: tag });
+          this.setState({
+            images: responseData.photos.photo,
+            imagesTitle: tag
+          });
         }
       })
       .catch(error => {
@@ -74,9 +78,13 @@ class App extends React.Component {
             <Route
               path='/query/:query'
               render={() => (
-                <Gallery title={this.state.imagesTitle} data={this.state.images} />
+                <Gallery
+                  title={this.state.imagesTitle}
+                  data={this.state.images}
+                />
               )}
             />
+            <Route component={NotFound} />
           </Switch>
         </section>
       </BrowserRouter>
