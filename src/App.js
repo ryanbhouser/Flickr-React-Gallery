@@ -11,13 +11,14 @@ class App extends React.Component {
     super();
     this.state = {
       images: [],
+      imagesTitle: '',
       mountains: [],
       forrests: [],
       dogs: []
     };
   }
 
-  performSearch = (query) => {
+  performSearch = query => {
     this.getImagesFromFlickr(query);
   };
 
@@ -40,8 +41,7 @@ class App extends React.Component {
         } else if (tag === 'dogs') {
           this.setState({ dogs: responseData.photos.photo });
         } else {
-          this.setState({ images: responseData.photos.photo });
-          console.log(this.state.images);
+          this.setState({ images: responseData.photos.photo, imagesTitle: tag });
         }
       })
       .catch(error => {
@@ -57,19 +57,25 @@ class App extends React.Component {
           <Switch>
             <Route
               path='/mountains'
-              render={() => <Gallery data={this.state.mountains} />}
+              render={() => (
+                <Gallery title={'Mountains'} data={this.state.mountains} />
+              )}
             />
             <Route
               path='/forrests'
-              render={() => <Gallery data={this.state.forrests} />}
+              render={() => (
+                <Gallery title={'Forrests'} data={this.state.forrests} />
+              )}
             />
             <Route
               path='/dogs'
-              render={() => <Gallery data={this.state.dogs} />}
+              render={() => <Gallery title={'Dogs'} data={this.state.dogs} />}
             />
             <Route
               path='/query/:query'
-              render={() => <Gallery data={this.state.images} />}
+              render={() => (
+                <Gallery title={this.state.imagesTitle} data={this.state.images} />
+              )}
             />
           </Switch>
         </section>
