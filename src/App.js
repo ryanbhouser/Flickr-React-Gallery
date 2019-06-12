@@ -1,39 +1,71 @@
 import React from 'react';
-// import apiKey from './config';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import apiKey from './config';
 
 import Header from './Components/Header';
-import MainNav from './Components/MainNav';
 import Gallery from './Components/Gallery';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      images: []
+      images: [],
+      mountains: [],
+      forrests: [],
+      dogs: []
     };
   }
 
   componentDidMount() {
+    this.getImagesFromFlickr('mountains');
+    this.getImagesFromFlickr('forrest');
+    this.getImagesFromFlickr('dogs');
+  }
+
+  getImagesFromFlickr = tag => {
     fetch(
-      'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=5ea4eaa0bd7d7d1d54f9b8db641bb2ba&tags=disney&per_page=24&format=json&nojsoncallback=1'
+      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tag}&per_page=24&format=json&nojsoncallback=1`
     )
       .then(response => response.json())
       .then(responseData => {
-        this.setState({ images: responseData.photos.photo });
+        if (tag === 'mountains') {
+          this.setState({ mountains: responseData.photos.photo });
+        } else if (tag === 'forrest') {
+          this.setState({ forrests: responseData.photos.photo });
+        } else if (tag === 'dogs') {
+          this.setState({ dogs: responseData.photos.photo });
+        } else {
+          this.setState({ images: responseData.photos.photo });
+        }
       })
       .catch(error => {
         console.log('Error fetching and parsing data', error);
       });
-  }
+  };
 
   render() {
     return (
       <div>
-        <Header />
-        <MainNav />
-        <div className='photo-container'>
-          <Gallery data={this.state.images} />
-        </div>
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <div className='photo-container'>
+              <Route
+                path='/mountains'
+                render={() => <Gallery data={this.state.mountains} />}
+              />
+              <Route
+                path='/forrests'
+                render={() => <Gallery data={this.state.forrests} />}
+              />
+              <Route
+                path='/dogs'
+                render={() => <Gallery data={this.state.dogs} />}
+              />
+            </div>
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
