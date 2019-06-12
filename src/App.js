@@ -60,6 +60,13 @@ class App extends React.Component {
         <section className='photo-container'>
           <Switch>
             <Route
+              exact
+              path='/'
+              render={() => (
+                <h3>Search for a tag in the search box above!</h3>
+              )}
+            />
+            <Route
               path='/mountains'
               render={() => (
                 <Gallery title={'Mountains'} data={this.state.mountains} />
