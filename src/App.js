@@ -46,27 +46,29 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <BrowserRouter>
-          <Header />
+      <BrowserRouter>
+        <Header />
+        <section className='photo-container'>
           <Switch>
-            <div className='photo-container'>
-              <Route
-                path='/mountains'
-                render={() => <Gallery data={this.state.mountains} />}
-              />
-              <Route
-                path='/forrests'
-                render={() => <Gallery data={this.state.forrests} />}
-              />
-              <Route
-                path='/dogs'
-                render={() => <Gallery data={this.state.dogs} />}
-              />
-            </div>
+            <Route
+              path='/mountains'
+              render={() => <Gallery data={this.state.mountains} />}
+            />
+            <Route
+              path='/forrests'
+              render={() => <Gallery data={this.state.forrests} />}
+            />
+            <Route
+              path='/dogs'
+              render={() => <Gallery data={this.state.dogs} />}
+            />
+            <Route
+              path='/:search'
+              render={() => <Gallery data={this.state.images} />}
+            />
           </Switch>
-        </BrowserRouter>
-      </div>
+        </section>
+      </BrowserRouter>
     );
   }
 }
