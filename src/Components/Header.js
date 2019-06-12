@@ -7,7 +7,7 @@ const Header = (props) => {
     <header>
       <h1>React Image Gallery</h1>
       <p>Search for an image below...</p>
-      <SearchForm onSearch={props.performSearch} />
+      <SearchForm onSearch={props.onSearch} />
       <MainNav />
     </header>
   );

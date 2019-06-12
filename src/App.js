@@ -41,6 +41,7 @@ class App extends React.Component {
           this.setState({ dogs: responseData.photos.photo });
         } else {
           this.setState({ images: responseData.photos.photo });
+          console.log(this.state.images);
         }
       })
       .catch(error => {
@@ -67,7 +68,7 @@ class App extends React.Component {
               render={() => <Gallery data={this.state.dogs} />}
             />
             <Route
-              path='/:query'
+              path='/query/:query'
               render={() => <Gallery data={this.state.images} />}
             />
           </Switch>
