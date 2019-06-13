@@ -1,5 +1,6 @@
 import React from 'react';
 
+// 404-like message to display if a user enters a route that doesn't exist
 class NotFound extends React.Component {
   render() {
     return (

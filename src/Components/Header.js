@@ -2,6 +2,7 @@ import React from 'react';
 import MainNav from './MainNav';
 import SearchForm from './SearchForm';
 
+// Displays header component with search form and nav
 const Header = (props) => {
   return (
     <header>

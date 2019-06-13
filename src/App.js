@@ -20,16 +20,21 @@ class App extends React.Component {
     };
   }
 
+  // Calls the API from a query in the search box
   performSearch = query => {
     this.getImagesFromFlickr(query);
   };
 
+  // Inits call for three main categories
   componentDidMount() {
     this.getImagesFromFlickr('mountains');
     this.getImagesFromFlickr('forrest');
     this.getImagesFromFlickr('dogs');
   }
 
+  // If tag equals mountains, forrest, or dogs, set the state to the results of that call
+  // If other, set the state to the results of whatever the user searched for
+  // Sets loading to false, and back to true once the API call is through
   getImagesFromFlickr = tag => {
     fetch(
       `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tag}&per_page=24&format=json&nojsoncallback=1`
@@ -62,6 +67,7 @@ class App extends React.Component {
     this.setState({ loading: true });
   };
 
+  // Renders the header and gallery components.  Also uses react-router to display routes
   render() {
     return (
       <BrowserRouter>

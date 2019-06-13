@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
+// Displays nav component with NavLinks to the three main routes
 class MainNav extends React.Component {
   render() {
     return (
