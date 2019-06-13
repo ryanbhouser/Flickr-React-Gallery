@@ -15,7 +15,8 @@ class App extends React.Component {
       imagesTitle: '',
       mountains: [],
       forrests: [],
-      dogs: []
+      dogs: [],
+      loading: true
     };
   }
 
@@ -36,21 +37,29 @@ class App extends React.Component {
       .then(response => response.json())
       .then(responseData => {
         if (tag === 'mountains') {
-          this.setState({ mountains: responseData.photos.photo });
+          this.setState({
+            mountains: responseData.photos.photo,
+            loading: false
+          });
         } else if (tag === 'forrest') {
-          this.setState({ forrests: responseData.photos.photo });
+          this.setState({
+            forrests: responseData.photos.photo,
+            loading: false
+          });
         } else if (tag === 'dogs') {
-          this.setState({ dogs: responseData.photos.photo });
+          this.setState({ dogs: responseData.photos.photo, loading: false });
         } else {
           this.setState({
             images: responseData.photos.photo,
-            imagesTitle: tag
+            imagesTitle: tag,
+            loading: false
           });
         }
       })
       .catch(error => {
         console.log('Error fetching and parsing data', error);
       });
+    this.setState({ loading: true });
   };
 
   render() {
@@ -62,9 +71,7 @@ class App extends React.Component {
             <Route
               exact
               path='/'
-              render={() => (
-                <h3>Search for a tag in the search box above!</h3>
-              )}
+              render={() => <h3>Search for a tag in the search box above!</h3>}
             />
             <Route
               path='/mountains'
@@ -83,11 +90,12 @@ class App extends React.Component {
               render={() => <Gallery title={'Dogs'} data={this.state.dogs} />}
             />
             <Route
-              path='/:tag'
+              path='/search/:tag'
               render={() => (
                 <Gallery
                   title={this.state.imagesTitle}
                   data={this.state.images}
+                  loading={this.state.loading}
                 />
               )}
             />

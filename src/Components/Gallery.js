@@ -3,15 +3,10 @@ import GalleryItem from './GalleryItem';
 
 const Gallery = props => {
   const results = props.data;
+  let flickrImages;
 
-  if (results.length < 1) {
-    return (
-      <div>
-        <h3>Sorry, no results were found for that query. Try again.</h3>
-      </div>
-    );
-  } else {
-    let flickrImages = results.map((img, i) => {
+  if (results.length > 1) {
+    flickrImages = results.map((img, i) => {
       return (
         <GalleryItem
           key={i}
@@ -23,13 +18,16 @@ const Gallery = props => {
         />
       );
     });
-    return (
-      <div>
-        <h3>{props.title}</h3>
-        <ul>{flickrImages}</ul>
-      </div>
-    );
+  } else {
+    flickrImages = 'Sorry, no results were found.';
   }
+
+  return (
+    <div>
+      <h3>{props.title}</h3>
+      <ul>{props.loading ? <p>Loading...</p> : flickrImages}</ul>
+    </div>
+  );
 };
 
 export default Gallery;
